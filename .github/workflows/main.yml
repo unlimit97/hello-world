@@ -35,7 +35,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: Set Up JDK 1.8
-        uses: action/setup-java@v1
+        uses: action/setup-java@v2
         with:
            java-version: 1.8
       - name: Synopsys Detect
