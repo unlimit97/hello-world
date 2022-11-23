@@ -1,4 +1,6 @@
-name: Synopsys
+# This is a basic workflow to help you get started with Actions
+
+name: CI-Blackduck
 
 # Controls when the workflow will run
 on:
@@ -16,25 +18,26 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    # runs-on: [self-hosted]
-    runs-on: ubuntu-latest
+   runs-on: [ubuntu-latest]
+#    runs-on: [self-hosted, Windows, kiran]
+#    runs-on: [self-hosted, Linux, kishor-linux]
+
+   env:
+     MAC_BRIDGE_URL: "https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.72/ci-package-0.1.72-macosx.zip"
+     LINUX_BRIDGE_URL: "https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.72/ci-package-0.1.72-linux64.zip"
+     WINDOWS_BRIDGE_URL: "https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.72/ci-package-0.1.72-win64.zip"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
+   steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      - name: Synopsys Application Security Testing
-        uses: synopsys-sig/synopsys-action@main
+      - name: Use synopsys unified-action - blackduck-detect
+       # Use the action defined in this repository
+        uses: ./
         with:
- #         synopsys_bridge_path: /tmp/synopsys-bridge
- #         bridge_download_url: ${{ env.MACOSX_BRIDGE_URL }}
-
           blackduck_url: ${{ secrets.BLACKDUCK_URL }}
           blackduck_apiToken: ${{ secrets.BLACKDUCK_API_TOKEN }}
-          # Work around for SIGINT-277
-          blackduck_install_directory: /tmp/blackduck
           blackduck_scan_full: true
-#        env:
-#          MACOSX_BRIDGE_URL: "https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.61/ci-package-0.1.61-macosx.zip"
-
+          blackduck_install_directory: /home/runner/synopsys-bridge/
+          blackduck_scan_failure_severities: "[\"BLOCKER\", \"CRITICAL\", \"TRIVIAL\"]"
+          bridge_download_url: ${{ env.LINUX_BRIDGE_URL }}
