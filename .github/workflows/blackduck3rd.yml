@@ -14,6 +14,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+      #- name: Set Up JDK 1.8
+      #  uses: action/setup-java@v2
+      #  with:
+      #     java-version: 1.8
+      - name: Set Up JDK 11
+        uses: actions/setup-java@v2
+        with:
+            distribution: 'adopt' # See 'Supported distributions' for available options
+            java-version: '11'
+
       - name: Synopsys Action
         uses: synopsys-sig/synopsys-action@v0.2.0
         with:
@@ -33,10 +53,7 @@ jobs:
           # The Synopsys Bridge software distribution is platform specific - this must match the host OS
           # of your runner. For example in this case, we are using the latest version for Linux.
           bridge_download_url: ${{ env.LINUX_BRIDGE_URL }}
-          #blackduck_install_directory: /home/runner/work
-          #downloads_blackduck_url: /home/runner/work
-          #downloads_blackduck_path: /home/runner/work
           
         env:
           LINUX_BRIDGE_URL: "https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.114/ci-package-0.1.114-linux64.zip"
-          SPRING_APPLICATION_JSON: '{"logging.level.com.synopsys.integration":"DEBUG", "detect.tools":"DETECTOR", "detect.bdio.output.path":"/home/runner/work", "detect.output.path":"/home/runner/work"}'
+          SPRING_APPLICATION_JSON: '{"logging.level.com.synopsys.integration":"DEBUG", "detect.tools":"DETECTOR"}'
