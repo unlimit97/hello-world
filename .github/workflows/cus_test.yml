@@ -35,8 +35,8 @@ jobs:
         run: |
           mkdir -p blackduck/output   
           java -jar blackduck/synopsys-detect-9.10.0.jar \
-          --blackduck.url="https://blackduck-pub.tmapadmin.com/" \
-          --blackduck.api.token=YTMwODFkM2EtMjZlNS00MmY0LThlOGEtM2JkZjhmZmU1MTJlOjQwMjVlODNjLTRiZmQtNGJkNS1iOTIwLTA3MDYxYjA2ODcxNw== \
+          --blackduck.url="https://aws-eng-hub-sangjulee-test01.eng.aws.internal/" \
+          --blackduck.api.token=NjJjZDcxNmEtNzRiYi00MDczLWFiNDktY2VmNzY5Y2UwOTQ2OmU4YjA1YTRiLTE5M2ItNDgwZC04YjUxLTNiOGRlNGViNzVjMw== \
           --blackduck.trust.cert=true \
           --detect.project.name=TMAP_ANDROID \
           --detect.project.version.name=1.0 \
@@ -44,6 +44,6 @@ jobs:
           --detect.output.path=blackduck/output   \
           --detect.detector.search.depth=5 \
           --detect.accuracy.required=NONE \
-          --detect.excluded.directories="**/build" \
+          --detect.excluded.directories="**/build,./blackduck" \
           --detect.excluded.detector.types=NUGET \
           --logging.level.detect=DEBUG
