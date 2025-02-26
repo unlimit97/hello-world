@@ -34,8 +34,9 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir -p blackduck/output
+          pwd
           export JAVA_HOME=/usr/local/java/jdk-11.0.9/bin   
-          /usr/local/java/jdk-11.0.9/bin/java -jar blackduck/synopsys-detect-9.10.0.jar \
+          /usr/local/java/jdk-11.0.9/bin/java -jar /home/sangju/blackduck/synopsys-detect-9.10.0.jar \
           --blackduck.url="https://aws-eng-hub-sangjulee-test01.eng.aws.internal/" \
           --blackduck.api.token=NjJjZDcxNmEtNzRiYi00MDczLWFiNDktY2VmNzY5Y2UwOTQ2OmU4YjA1YTRiLTE5M2ItNDgwZC04YjUxLTNiOGRlNGViNzVjMw== \
           --blackduck.trust.cert=true \
