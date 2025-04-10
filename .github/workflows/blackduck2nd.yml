@@ -25,6 +25,9 @@ jobs:
 
       # Set up JDK 11 in runtime environment, necessary for running the Detect tool (invoked by the
       # detect plugin)
+      - name: Run a one-line script
+        run: echo "The value is $TEST_ENV_SJ1"
+        
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
